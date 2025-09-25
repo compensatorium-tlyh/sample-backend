@@ -1,0 +1,61 @@
+# Byte-compiled / optimized
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtualenv / venv
+.venv/
+venv/
+env/
+ENV/
+
+# Pip / packaging
+pip-wheel-metadata/
+*.egg-info/
+dist/
+build/
+
+# IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# System
+.DS_Store
+Thumbs.db
+
+# pytest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# mypy
+.mypy_cache/
+
+# logs
+logs/
+*.log
+
+# env files / secret keys
+.env
+.env.local
+.env.*.local
+
+# database files if used in local tests
+*.sqlite3
+*.db
+
+# docker
+docker-compose.override.yml
+docker-compose.*.yml
+
+# Next.js (if you have frontend in same repo)
+node_modules/
+.next/
+out/
+
+# Prisma generated client (if you prefer not to commit)
+prisma/.env
+prisma/migrations/
+node_modules/
