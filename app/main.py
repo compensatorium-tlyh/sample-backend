@@ -1,12 +1,8 @@
 from fastapi import FastAPI
-import os
-from dotenv import load_dotenv
-from supabase import create_client, Client
-from supabase.client import ClientOptions
-import psycopg2
+# from app.routes.v1 import sensor_routes
+# from app.services.mqtt_service import mqtt_client, connect_mqtt
 
-load_dotenv()
-app = FastAPI()
+app = FastAPI(title="Sample IoT Backend")
 
 
 @app.get("/")
@@ -14,22 +10,19 @@ async def root():
     print("OK")
     return {"message": "You're not alone"}
 
-url: str = os.environ.get("SUPABASE_URL")
-key: str = os.environ.get("SUPABASE_KEY")
 
-print(os.environ.get("SUPABASE_URL"))
-supabase: Client = create_client(
-    url,
-    key,
-    options=ClientOptions(
-        postgrest_client_timeout=10,
-        storage_client_timeout=10,
-        schema="public",
-    )
-)
+# Include routes
+# app.include_router(sensor_routes.router, prefix="/api/v1/sensors")
 
-response = (
-    supabase.table("Telemetry")
-    .insert({"id": 1, "sensorValue": 123.45, "sensorName": "Voltage"})
-    .execute()
-)
+
+"""
+@app.on_event("startup")
+async def startup_event():
+    await connect_mqtt()
+    print("MQTT connected")
+
+
+@app.on_event("shutdown")
+async def shutdown_event():
+    await mqtt_client.disconnect()
+"""
