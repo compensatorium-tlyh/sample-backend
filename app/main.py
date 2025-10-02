@@ -1,21 +1,28 @@
 from fastapi import FastAPI
+from contextlib import asynccontextmanager
+from app.routes.v1.mcu_routes import router as mcu_routes
+
 # from app.routes.v1 import sensor_routes
 # from app.services.mqtt_service import mqtt_client, connect_mqtt
 
-app = FastAPI(title="Sample IoT Backend")
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup commands
+    print("App initiated")
+    yield  # Externally, yield may return something, but here mustn't
+    # Shutdown commands
+    print("App shut down")
 
-@app.get("/")
-async def root():
-    print("OK")
-    return {"message": "You're not alone"}
-
+app = FastAPI(title="Sample IoT Backend", lifespan=lifespan)
 
 # Include routes
-# app.include_router(sensor_routes.router, prefix="/api/v1/sensors")
-
+app.include_router(mcu_routes, prefix="/api/v1/mcu")
 
 """
+@app.get("/")
+async def root():
+    return 
 @app.on_event("startup")
 async def startup_event():
     await connect_mqtt()

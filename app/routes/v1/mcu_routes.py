@@ -1,9 +1,16 @@
-"""
 from fastapi import APIRouter
+
+router = APIRouter()
+
+
+@router.get("/summary")
+async def summarize():
+    return {"message": "You're not alone"}
+
+"""
 from app.models.mcu import SensorData, ActuatorCommand
 from app.services import db_service, mqtt_service
 
-router = APIRouter()
 
 
 @router.post("/data")
